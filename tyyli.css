@@ -3,7 +3,7 @@
 #teamList {
     list-style:none;
     float: right;
-    width: 100%;
+    width: 300px;
     height: 500px;
     border-style: solid;
     border-color: black;
@@ -27,7 +27,6 @@ p {
     margin-bottom: 0%;
 }
 #teamDiv {
-  width: 25%;
   display: inline-block;
    
 }
@@ -38,9 +37,73 @@ p {
 }
 
 @media only screen and (max-width:300px){
- 
+    #teamList {
+        list-style:none;
+        float: right;
+        width: 250px;
+        height: 500px;
+        border-style: solid;
+        border-color: black;
+    }
+    #inMapList {
+        list-style:none;
+        padding: 0%;
+        margin: 0%;
+        float: left;
+        width: 250px;
+        height: 500px;
+        border-style: solid;
+        border-color: black;
+    }
+    #inMapDiv {
+        width: 100%;
+        margin-left: 0;
+        float: left;
+       
+    }
+    #teamDiv {
+        width: 100%;
+        display: inline-block;
+         
+      }
 }
 @media only screen and (min-width:300px) and (max-width:600px) {
-
+     #teamList {
+        list-style:none;
+        float: right;
+        width: 300px;
+        height: 500px;
+        border-style: solid;
+        border-color: black;
+    }
+    #inMapList {
+        list-style:none;
+        padding: 0%;
+        margin: 0%;
+        float: left;
+        width: 300px;
+        height: 500px;
+        border-style: solid;
+        border-color: black;
+    }
+    #inMapDiv {
+        
+        margin-left: 0;
+        float: left;
+       
+    }
+    #teamDiv {
+       
+        display: inline-block;
+         
+      }
+  
+} 
+@media only screen and (min-width:600px) and (max-width:980px) {
+    #inMapDiv {
+        margin-left: 0;
+        float: left;
+       
+    }
   
 } 

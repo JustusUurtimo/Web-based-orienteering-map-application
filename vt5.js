@@ -136,6 +136,51 @@ function CheckPointsOnMap() {
         }).openTooltip(bounds._northEast);
 
 
+        //taso 5 rastien siirto
+        circle.on({
+            mousedown: function () {
+                //jos on jo aijemmin valittu rasti, niin uudella valinnalla palautetaan väri edelliseen
+                if (clickedCheckPoint != undefined) {
+                    clickedCheckPoint.setStyle({ fillColor: 'f03', fillOpacity: 0.5 });
+                }
+                //päivitetään uuteen
+                clickedCheckPoint = circle;
+                //viimeksi siirretty rasti renkula on punainen
+                circle.setStyle({ fillColor: 'red', fillOpacity: 1 });
+                //estetään ettei kartta yritä liikkua rastin mukana
+                myMap.dragging.disable();
+                //siiretään ympyrä hiiren sijaintiin
+                myMap.on('mousemove', function (e) {
+                    circle.setLatLng(e.latlng);
+                    //uusi sijainti ylös
+                    let position = e.latlng;
+                    //päivitetään rastin sijainti
+                    data[2].rastit[r].lat = position.lat;
+                    data[2].rastit[r].lon = position.lng;
+                    //poistetaan vanha reitti joukkueelta, joihin rasti kohdistuu ja piirretään uudet
+                    for (let imt = 0; imt < inMapTeams.length; imt++) {
+                        RemoveRoute(inMapTeams[imt]);
+                        DrawRoute(inMapTeams[imt]);
+                    }
+                    //päiviteään vielä joukkueiden matkat
+                    for (let m in allTeamsList) {
+                        let teamA = document.getElementById(allTeamsList[m].id);
+                        let distance = CalcDistance(allTeamsList[m].id);
+                        let teamName = allTeamsList[m].nimi;
+                        teamA.textContent = teamName + " " + Math.round(distance) + " km";
+                    }
+                });
+            }
+        });
+        //tämä tapahtuu kun hiirestä päästetään irti
+        myMap.on('mouseup', function (e) {
+            //irrottaa rastin hiirestä
+            myMap.removeEventListener('mousemove');
+            //kartta on taas liikuteltavissa
+            myMap.dragging.enable();
+        });
+
+        /* TASON 3 RASTIEN SIIRTO
         //ympyrälle on click functio, joka muuttaa sen täysin punaiseksi
         circle.on("click", function (e) {
             //jos on jo aijemmin valittu rasti, niin uudella valinnalla palautetaan väri edelliseen
@@ -178,7 +223,7 @@ function CheckPointsOnMap() {
                 }
 
             });
-        });
+        });*/
 
     }
 
